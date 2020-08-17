@@ -7,7 +7,6 @@ body {
 
 .target {
   position: absolute;
-  transform: translate(-50%, -50%);
 }
 
 .line {
@@ -31,5 +30,5 @@ body {
   position: absolute;
   font-size: 38px;
   color: white;
-  transform: translate(20px, 20px);
+  margin: 20px;
 }
