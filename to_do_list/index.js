@@ -8,24 +8,25 @@ input.addEventListener('keypress', (event) => {
   }
 });
 
+toDoList.addEventListener('click', (event) => {
+  const id = event.target.dataset.id;
+  if (id) {
+    const toBeDeleted = document.querySelector(`li[data-id="${id}"]`);
+    toBeDeleted.remove();
+  }
+});
+let id = 0;
 const addToDo = (toDo) => {
   const li = document.createElement('li');
-  const span = document.createElement('span');
-  const deleteBtn = document.createElement('button');
-  deleteBtn.setAttribute('class', 'delete_btn');
-  deleteBtn.addEventListener('click', deleteToDo);
+  li.setAttribute('data-id', id);
 
-  span.innerText = toDo;
-  deleteBtn.innerText = '❌';
+  li.innerHTML = `
+      <span>${toDo}</span>
+      <button class="delete_btn" data-id=${id}>❌</button>
+    `;
 
-  li.appendChild(span);
-  li.appendChild(deleteBtn);
+  id++;
 
   toDoList.appendChild(li);
   li.scrollIntoView({ block: 'center' });
-};
-
-const deleteToDo = (event) => {
-  const li = event.target.parentNode;
-  li.remove();
 };
