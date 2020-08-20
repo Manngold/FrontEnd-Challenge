@@ -3,31 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./index.js"></script>
     <script
       src="https://kit.fontawesome.com/42fcee12ee.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./style.css" />
     <title>Find Carrot</title>
   </head>
   <body>
-    <section class="container">
-      <div class="status__container">
-        <button class="status__button--start">
-          <i class="fas fa-play"></i>
+    <section class="game">
+      <header class="game__header">
+        <button class="game__button">
+          <i class="fas fa-redo"></i>
         </button>
-        <span class="status__text--timer">0:0</span>
-        <span class="status__text--count">5</span>
-      </div>
-      <div class="game-zone">
-        <div class="result__container--show">
-          <button class="result__button--retry">
-            <i class="fas fa-redo"></i>
-          </button>
-          <span class="result__text--lose">Retry?</span>
-        </div>
-      </div>
+        <span class="game__timer">0:0</span>
+        <span class="game__score">5</span>
+      </header>
+      <section class="game__field"></section>
     </section>
-    <script src="./index.js"></script>
+    <section class="pop-up pop-up--hidden">
+      <button class="pop-up__button">
+        <i class="fas fa-redo"></i>
+      </button>
+      <span class="pop-up__text">Hello</span>
+    </section>
   </body>
 </html>
