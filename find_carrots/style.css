@@ -3,6 +3,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 button {
@@ -63,7 +64,7 @@ button:hover {
   width: 100%;
   height: calc(50% - 20px);
   margin-top: 20px;
-  /* background-color: #00000090; */
+  position: relative;
 }
 
 .pop-up {
@@ -95,4 +96,12 @@ button:hover {
 
 .pop-up--hidden {
   display: none;
+}
+
+.bug {
+  position: absolute;
+}
+
+.carrot {
+  position: absolute;
 }
