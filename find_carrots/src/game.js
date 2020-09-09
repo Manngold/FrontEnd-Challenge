@@ -3,7 +3,26 @@
 import Field from './field.js';
 import { playAlert, playBg, playBug, playWin, stopBg } from './sound.js';
 
-export default class Game {
+export default class GameBuilder {
+  gameDuration(duration) {
+    this.duration = duration;
+    return this;
+  }
+  carrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+  bugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  builder() {
+    return new Game(this.duration, this.carrotCount, this.bugCount);
+  }
+}
+
+class Game {
   constructor(gameDuration, carrotCount, bugCount) {
     this.gameDuration = gameDuration;
     this.carrotCount = carrotCount;

@@ -1,15 +1,15 @@
 'use strict';
 
 import PopUp from './popup.js';
-import Game from './game.js';
-
-const CARROT_COUNT = 5;
-const BUG_COUNT = 5;
-const GAME_DURATION_SEC = 5;
+import GameBuilder from './game.js';
 
 const gameFinishBanner = new PopUp();
 
-const game = new Game(GAME_DURATION_SEC, CARROT_COUNT, BUG_COUNT);
+const game = new GameBuilder()
+  .gameDuration(5)
+  .carrotCount(3)
+  .bugCount(3)
+  .builder();
 game.setGameStopListener((reason) => {
   if (reason === 'win') {
     gameFinishBanner.showWithText('You won');
