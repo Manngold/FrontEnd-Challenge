@@ -3,7 +3,13 @@
 import Field from './field.js';
 import { playAlert, playBg, playBug, playWin, stopBg } from './sound.js';
 
-export default class GameBuilder {
+export const Reason = Object.freeze({
+  win: 'win',
+  lose: 'lose',
+  cancel: 'cancel',
+});
+
+export class GameBuilder {
   gameDuration(duration) {
     this.duration = duration;
     return this;
@@ -64,7 +70,7 @@ class Game {
     this.hideGameButton();
     playAlert();
     stopBg();
-    this.onGameStop && this.onGameStop('cancel');
+    this.onGameStop && this.onGameStop(Reason.cancel);
   }
 
   finish(win) {
@@ -77,7 +83,7 @@ class Game {
       playBug();
     }
     stopBg();
-    this.onGameStop && this.onGameStop(win ? 'win' : 'lose');
+    this.onGameStop && this.onGameStop(win ? Reason.win : Reason.lose);
   }
 
   onItemClick = (item) => {
