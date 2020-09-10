@@ -1,10 +1,14 @@
 'use strict';
 
 import { playCarrot } from './sound.js';
+export const typeField = Object.freeze({
+  carrot: 'carrot',
+  bug: 'bug',
+});
 
 const CARROT_SIZE = 80;
 
-export default class Field {
+export class Field {
   constructor(carrotCount, bugCount) {
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
@@ -15,8 +19,8 @@ export default class Field {
 
   init() {
     this.field.innerHTML = '';
-    this.addItem('carrot', this.carrotCount, 'img/carrot.png');
-    this.addItem('bug', this.bugCount, 'img/bug.png');
+    this.addItem(typeField.carrot, this.carrotCount, 'img/carrot.png');
+    this.addItem(typeField.bug, this.bugCount, 'img/bug.png');
   }
 
   setClickListener(onItemClick) {
@@ -28,9 +32,9 @@ export default class Field {
     if (target.matches('.carrot')) {
       target.remove();
       playCarrot();
-      this.onItemClick && this.onItemClick('carrot');
+      this.onItemClick && this.onItemClick(typeField.carrot);
     } else if (target.matches('.bug')) {
-      this.onItemClick && this.onItemClick('bug');
+      this.onItemClick && this.onItemClick(typeField.bug);
     }
   };
 
