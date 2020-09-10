@@ -45,7 +45,7 @@ class Game {
 
     this.gameBtn.addEventListener('click', () => {
       if (this.started) {
-        this.stop();
+        this.stop(Reason.cancel);
       } else {
         this.start();
       }
@@ -64,26 +64,27 @@ class Game {
     playBg();
   }
 
-  stop() {
+  stop(reason) {
     this.started = false;
     this.stopGameTimer();
     this.hideGameButton();
-    playAlert();
-    stopBg();
-    this.onGameStop && this.onGameStop(Reason.cancel);
-  }
+    switch (reason) {
+      case Reason.cancel:
+        playAlert();
+        stopBg();
+        break;
+      case Reason.win:
+        playWin();
+        break;
+      case Reason.lose:
+        playBug();
+        break;
 
-  finish(win) {
-    this.started = false;
-    this.stopGameTimer();
-    this.hideGameButton();
-    if (win) {
-      playWin();
-    } else {
-      playBug();
+      default:
+        throw new Error('Exceoption Reason');
     }
     stopBg();
-    this.onGameStop && this.onGameStop(win ? Reason.win : Reason.lose);
+    this.onGameStop && this.onGameStop(reason);
   }
 
   onItemClick = (item) => {
@@ -94,10 +95,10 @@ class Game {
       this.score++;
       this.updateScoreBoard();
       if (this.score === this.carrotCount) {
-        this.finish(true);
+        this.stop(Reason.win);
       }
     } else if (item === 'bug') {
-      this.finish(false);
+      this.stop(Reason.lose);
     }
   };
 
@@ -107,6 +108,7 @@ class Game {
 
   showStopButton() {
     const icon = document.querySelector('.fas');
+    this.gameBtn.style.visibility = 'visible';
     icon.classList.add('fa-stop');
     icon.classList.remove('fa-play');
   }
@@ -126,7 +128,7 @@ class Game {
     this.timer = setInterval(() => {
       if (remainingTimeSec <= 0) {
         clearInterval(this.timer);
-        this.finish(this.carrotCount === this.score);
+        this.stop(Reason.lose);
         return;
       }
       this.updateTimerText(--remainingTimeSec);
